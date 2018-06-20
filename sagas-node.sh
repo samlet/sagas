@@ -1,5 +1,9 @@
 #!/binb/bash
+## sagas - workstation node
+## install the latest docker
 curl -fsSL get.docker.com | sh
+## use china mirror
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://e48b256f.m.daocloud.io
 
 # Restart docker to make sure we get the latest version of the daemon if there is an upgrade
 sudo service docker restart
