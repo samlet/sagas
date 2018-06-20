@@ -7,3 +7,10 @@ abc sagas IaC startup scripts
 ```sh
 curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas.sh | bash
 ```
+
+## cleanup
+
+```sh
+rm -rf ~/.sagas
+sudo rm /usr/local/bin/sagas
+```
