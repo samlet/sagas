@@ -2,7 +2,7 @@
 set -e
 
 if [ $# -lt 1 ]; then	
-	echo "assign a command, available commands: init, install, run, ..."
+	echo "assign a command, available commands: node, java, js, run, upgrade, destroy, ..."
 	exit -1
 fi
 
@@ -23,21 +23,34 @@ function update_sagas(){
     popd
 }
 
+function destroy_sagas(){
+    rm -rf ~/.sagas
+    sudo rm /usr/local/bin/sagas
+}
+
 case "$CMD" in
-	"node")		
-		curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas-node.sh | bash
+	"destroy")		
+		destroy_sagas
 		;;
-	"java")
-		curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas-java.sh | bash
+	"upgrade")
+		destroy_sagas
+        curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas.sh | bash
 		;;	
 	"run")
+        ## for instance: $ sagas run images
 		if [ $# -gt 1 ]; then	
-			target=$2
-			echo "run $target ..."
+			target=${@:2}
+			echo "with args $target ..."
+            docker $target
 		else
-			echo "use: ...."
+			echo "unknown: " $*
 		fi
 		;;
+    "dev")
+        testing_target=$2
+        echo "♬ testing target is ${testing_target} with args  ${@:3}..."
+        bash /vagrant/sagas/sagas-${testing_target}.sh ${@:3}
+        ;;
 	*)
         echo "➽ execute script $CMD ..."
         update_sagas

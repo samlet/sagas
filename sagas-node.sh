@@ -7,6 +7,6 @@ sudo service docker restart
 sudo usermod -aG docker vagrant
 
 # docker-compose
-sudo apt-get install python-pip
+sudo apt-get install -y python-pip
 sudo pip install docker-compose
 
