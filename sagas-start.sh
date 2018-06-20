@@ -24,7 +24,8 @@ case "$CMD" in
 		;;
 	*)
         echo "➽ execute script $CMD ..."
-		curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas-${CMD}.sh | bash
+		## curl -fsSL https://raw.githubusercontent.com/samlet/sagas/master/sagas-${CMD}.sh | bash
+        bash $HOME/.sagas/sagas/sagas-${CMD}.sh
 		;;
 esac
 
